@@ -105,8 +105,9 @@ class BookInMemoryRepository
      * @param search Cadena de busqueda
      * @return Lista de libros que cumplen la cadena de busqueda
      */
-    val filteredBooks: MutableList<Book> = mutableListOf()
+    var filteredBooks: MutableList<Book> = mutableListOf()
     override suspend fun searchBooks(search: String): List<Book> {
+        filteredBooks = mutableListOf()
         delay(2000L)
         val allBooks = readAll();
         for (book in allBooks){
