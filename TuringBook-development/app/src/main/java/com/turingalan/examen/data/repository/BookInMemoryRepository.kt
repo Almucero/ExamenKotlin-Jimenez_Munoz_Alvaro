@@ -112,10 +112,10 @@ class BookInMemoryRepository
         val allBooks = readAll();
         for (book in allBooks){
             if (
-                book.title.contains(search) ||
-                book.author.contains(search) ||
-                book.isbn.contains(search) ||
-                book.editorial.contains(search)
+                book.title.contains(search, true) ||
+                book.author.contains(search, true) ||
+                book.isbn.contains(search, true) ||
+                book.editorial.contains(search, true)
                 ) {
                 filteredBooks.add(book)
             }
@@ -125,7 +125,7 @@ class BookInMemoryRepository
 
     override suspend fun readFiltered(): List<Book> {
         delay(2000L)
-        return filteredBooks
+        return filteredBooks//.toList()
     }
 
     override suspend fun readOne(id: Long) = _books.firstOrNull { book -> book.id == id }
